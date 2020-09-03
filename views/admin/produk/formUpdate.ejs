@@ -16,8 +16,8 @@
       </div>
       <div class="form-group">
            <label>nama kategory</label>
-        <select class="form-control" name="id_category">
-          <option>--- nama kategori ---</oWption>
+        <select class="form-control" name="idcategory">
+          <option value="<%=data[0].id_category %>">--- nama kategori ---</oWption>
             <% for(let i = 0; i< dataCategory.length; i++){ %>
               <option value="<%= dataCategory[i].id %>"><%= dataCategory[i].nama_kategori %></option>
               <%}%>

@@ -3,7 +3,6 @@ const ProdukModel = require('../model/Produk')
 const CategoryModel = require('../model/Category')
 const fs = require('fs-extra')
 const path = require('path')
-const { type } = require('os')
 
 module.exports = {
     getAllhistory: async(req,res) => {
@@ -80,14 +79,8 @@ module.exports = {
             const {id_category,title, harga} = req.body
             const image = req.file.filename
             console.log(image,title, harga)
-            if (id_category >= 1 && id_category <= 4 ){
-                const add =  await ProdukModel.addPRoduct(title, harga, image, id_category)
-                res.json(add)
-            } else {
-                res.json({
-                    message: "tidak ada kategori di dalam produk"
-                })
-            }
+            const add =  await ProdukModel.addPRoduct(title, harga, image, id_category)
+            res.json(add)
         } catch (error) {
             res.status(500).send("error addd")
         }
@@ -108,16 +101,16 @@ module.exports = {
     updateProduk: async (req,res) => {
         try {
             const { id } = req.params
-            const { title, harga } = req.body
+            const { title, harga, id_category } = req.body;
             const finID = await ProdukModel.finOne(id)
             const image = !req.file ? finID[0].image : req.file.filename
            console.log(image)
             if (image === finID[0].image  ) {
-                const Update = await ProdukModel.updateProduk(title, harga, image, id)
+                const Update = await ProdukModel.updateProduk(title, harga, image, id, id_category)
                 res.json(Update)
             } else {
                 await fs.unlink(path.join(`public/images/${finID[0].image}`))
-                const upd = await ProdukModel.updateProduk(title, harga, image, id)
+                const upd = await ProdukModel.updateProduk(title, harga, image, id, id_category)
                 res.status(200).json(upd)
 
             }

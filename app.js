@@ -9,7 +9,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const apiRouter = require('./routes/api')
 const adminRouter = require('./routes/admin')
-
+const session = require("express-session");
+const flash = require("connect-flash");
 var app = express();
 
 // view engine setup
@@ -23,7 +24,16 @@ app.use(cookieParser());
 
 // method overide
 app.use(methodOveride("_method"))
-
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+  })
+);
+// connect flash
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public/images')));
 app.use('/sb-admin-2', express.static(path.join(__dirname, 'node_modules/startbootstrap-sb-admin-2')))
 

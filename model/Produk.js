@@ -71,9 +71,9 @@ module.exports = {
     })
   },
 
-  updateProduk: (title,  harga, image, id, id_category) => {
+  updateProduk: (title,  harga, image, id, idcategory) => {
     return new Promise ((resolve,reject) => {
-      db.query(`UPDATE PRODUK SET title='${title}', id_category= '${id_category}', harga='${harga}', image= '${image}' WHERE ID= '${id}'`, (err, result) => {
+      db.query(`UPDATE PRODUK SET title='${title}', id_category= '${idcategory}', harga='${harga}', image= '${image}' WHERE ID= '${id}'`, (err, result) => {
         if(err){
           reject(new Error(err))
         } else {
