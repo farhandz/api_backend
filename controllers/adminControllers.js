@@ -2,6 +2,7 @@ const categoryModeel = require('../model/Category')
 const produkModel = require('../model/Produk')
 const fs = require('fs-extra')
 const path = require('path')
+const historyModel = require('../model/History')
 module.exports = {
     viewDashboard: (req,res) => {
         res.render('admin/dashboard')
@@ -37,6 +38,15 @@ module.exports = {
             res.render('admin/produk/updateProduk', {data, dataCategory})
         } catch (error) {
             
+        }
+    },
+    viewHIstoryid: async(req,res)=> {
+        try {
+            const { id } = req.params
+            const data = await historyModel.getHIstoryid(id)
+            res.render('admin/history/updateHistory', { data})
+        } catch (error) {
+            res.send(error.message)
         }
     },
 
@@ -160,6 +170,66 @@ module.exports = {
              req.flash("allertStatus", "warning")
              res.redirect('/admin/produk')
         }
+    },
+
+    viewHIstory: async(req,res) =>{
+        try {
+            let allertMessage = req.flash("allertMessage");
+            let allertStatus = req.flash("allertStatus");
+            const alert = { message: allertMessage, status: allertStatus };
+            const data = await historyModel.getHIstory()
+            res.render('admin/history', {
+                data,
+                alert
+            })
+        } catch (error) {
+            res.send(error.message)
+        }
+    },
+    addHistory: async(req,res) => {
+        try {
+            req.flash("allertMessage", "success add history")
+            req.flash("allertStatus", "success")
+            const date = new Date()
+            const { invoices, orders, amount } = req.body
+            const data = await historyModel.InsertHistory(invoices, orders, amount, date)
+            res.redirect('/admin/history')
+        } catch (error) {
+            req.flash("allertMessage", `${error.message}`)
+            req.flash("allertStatus", "warning")
+            res.redirect('/admin/history')
+        }
+        
+    },
+    deletehistory: async(req,res) => {
+        try {
+            req.flash("allertMessage", "success delete history")
+            req.flash("allertStatus", "success")
+            const { id } = req.params;
+             await historyModel.deleteId(id)
+            res.redirect('/admin/history')
+        } catch (error) {
+            req.flash("allertMessage", `${error.message}`)
+            req.flash("allertStatus", "warning")
+            res.redirect('/admin/history')
+        }
+    },
+
+    updateHIstory: async(req,res) => {
+        try {
+            req.flash("allertMessage", "success update history")
+            req.flash("allertStatus", "success")
+            const { id } = req.params
+            const { invoices, orders, amount } = req.body
+            const Update = await historyModel.updateId(invoices, orders, amount, id)
+            res.redirect('/admin/history')
+        } catch (error) {
+            req.flash("allertMessage", `${error.message}`)
+            req.flash("allertStatus", "warning")
+            res.send(error.message)
+            res.redirect('/admin/history')
+        }
     }
+    
 
 }

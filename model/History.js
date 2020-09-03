@@ -12,6 +12,17 @@ module.exports = {
       });
     });
   },
+  getHIstoryid: (id) => {
+    return new Promise((resolve, reject) => {
+      db.query(`SELECT * FROM history WHERE ID = ${id}`, (err, result) => {
+        if (err) {
+          reject(new Error(err));
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  },
 
   InsertHistory: (invoices, orders, amount) => {
     return new Promise((resolve, reject) => {

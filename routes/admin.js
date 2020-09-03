@@ -2,6 +2,7 @@ const express = require('express')
 const adminControllers = require('../controllers/adminControllers')
 const router = express.Router()
 const { uploadsingle, uploadMultiple } = require("../helpers/multer");
+const { route } = require('.');
 
 // dashboard
 router.get('/dashboard', adminControllers.viewDashboard)
@@ -20,5 +21,13 @@ router.get('/produk/:id', adminControllers.viewProdukid)
 router.post('/produk',  uploadsingle, adminControllers.addProduk)
 router.delete('/produk/:id', adminControllers.deleteProduk)
 router.put('/produk/:id', uploadsingle, adminControllers.updateProduk)
+
+
+// history
+router.get('/history', adminControllers.viewHIstory)
+router.get('/history/:id', adminControllers.viewHIstoryid)
+router.post('/history', adminControllers.addHistory)
+router.delete('/history/:id', adminControllers.deletehistory)
+router.put('/history/:id', adminControllers.updateHIstory)
 
 module.exports = router
