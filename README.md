@@ -1,0 +1,2 @@
+# api_backend
+Project saya ini tentang sebuah aplikasi pos yang didalamya terdapat multer,authentication, authorisation, hak akses, redis, menggunakan jwt ketika login dan membuath sebuah refresh token yang dapat digunakan ketika token utama expired atau gagal authorization  maka otomatis akan men generate token baru.  Tidak lupa juga saya menambah sort berdasarkan asc, desc, search dan pagination kedalam data redisdisini saya akan langsung mendemokkan project saya....	
