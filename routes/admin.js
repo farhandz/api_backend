@@ -28,6 +28,6 @@ router.get('/history', adminControllers.viewHIstory)
 router.get('/history/:id', adminControllers.viewHIstoryid)
 router.post('/history', adminControllers.addHistory)
 router.delete('/history/:id', adminControllers.deletehistory)
-router.put('/history/:id', adminControllers.updateHIstory)
+router.put('/history/:id', adminControllers.updateHIstory )
 
 module.exports = router
