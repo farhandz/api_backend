@@ -1,4 +1,4 @@
-# APi PRJOECT POST APP
+# APi PROJECT POST APP
 project ini dibuat menggunakan express, mysql, redis. project ini akan terus beranjut sampai production/deploy. 
 
 # feature
