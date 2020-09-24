@@ -2,7 +2,7 @@
 <img src="https://www.restapiexample.com/wp-content/uploads/2017/09/nodejs-mysql-express.png" align="center"  alt="Project icon">
 
 
-# APi PROJECT POST APP
+# API PROJECT POS APP
 project ini dibuat menggunakan express, mysql, redis. project ini akan terus beranjut sampai production/deploy. 
 
 # feature
